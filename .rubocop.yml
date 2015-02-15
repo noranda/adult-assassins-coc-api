@@ -1,0 +1,22 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - Gemfile
+    - Gemfile.lock
+    - Guardfile
+    - lib/tasks/**/*.rake
+    - Rakefile
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+  RunRailsCops: true
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
