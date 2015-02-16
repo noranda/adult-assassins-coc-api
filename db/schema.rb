@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150215232459) do
+ActiveRecord::Schema.define(version: 20150216204945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clans", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "clans", ["name"], name: "index_clans_on_name", unique: true, using: :btree
 
   create_table "user_sessions", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,5 +50,15 @@ ActiveRecord::Schema.define(version: 20150215232459) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  create_table "wars", force: :cascade do |t|
+    t.datetime "start_date"
+    t.integer  "opposing_clan_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "wars", ["start_date"], name: "index_wars_on_start_date", using: :btree
+
   add_foreign_key "user_sessions", "users"
+  add_foreign_key "wars", "clans", column: "opposing_clan_id"
 end

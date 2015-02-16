@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authenticate_user_from_token!
+  before_action :require_user_session!
 
   private
 
