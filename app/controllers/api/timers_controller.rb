@@ -16,6 +16,15 @@ module Api
       end
     end
 
+    def destroy
+      timer = Timer.find(params[:id])
+      if timer.destroy
+        render nothing: true, status: 204
+      else
+        render json: { errors: true }, status: 422
+      end
+    end
+
     private
 
     def create_params
