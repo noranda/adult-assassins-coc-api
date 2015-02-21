@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :show]
     resources :wars, only: [:index, :show, :create]
+    resources :timers, only: [:index, :create]
   end
 end

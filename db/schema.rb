@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221150151) do
+ActiveRecord::Schema.define(version: 20150221152920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20150221150151) do
 
   add_index "clans", ["name"], name: "index_clans_on_name", using: :btree
   add_index "clans", ["tag"], name: "index_clans_on_tag", unique: true, using: :btree
+
+  create_table "timers", force: :cascade do |t|
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "timers", ["end_date"], name: "index_timers_on_end_date", using: :btree
 
   create_table "user_sessions", force: :cascade do |t|
     t.integer  "user_id"
