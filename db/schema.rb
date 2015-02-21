@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216204945) do
+ActiveRecord::Schema.define(version: 20150221150151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20150216204945) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "tag"
   end
 
-  add_index "clans", ["name"], name: "index_clans_on_name", unique: true, using: :btree
+  add_index "clans", ["name"], name: "index_clans_on_name", using: :btree
+  add_index "clans", ["tag"], name: "index_clans_on_tag", unique: true, using: :btree
 
   create_table "user_sessions", force: :cascade do |t|
     t.integer  "user_id"
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150216204945) do
     t.integer  "opposing_clan_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "war_size"
   end
 
   add_index "wars", ["start_date"], name: "index_wars_on_start_date", using: :btree

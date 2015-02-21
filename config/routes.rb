@@ -3,6 +3,6 @@ Rails.application.routes.draw do
     post :login, to: 'user_sessions#create'
 
     resources :users, only: [:create, :show]
-    resources :wars, only: [:index, :show]
+    resources :wars, only: [:index, :show, :create]
   end
 end
