@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :timers, only: [:index, :create, :destroy]
     resources :players, only: [:create, :update]
     resources :war_players, only: [:create]
+    resources :attack_logs, only: [:create]
   end
 end
