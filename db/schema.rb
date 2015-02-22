@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221152920) do
+ActiveRecord::Schema.define(version: 20150221235631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20150221152920) do
 
   add_index "clans", ["name"], name: "index_clans_on_name", using: :btree
   add_index "clans", ["tag"], name: "index_clans_on_tag", unique: true, using: :btree
+
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "timers", force: :cascade do |t|
     t.datetime "end_date"
@@ -60,6 +66,18 @@ ActiveRecord::Schema.define(version: 20150221152920) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  create_table "war_players", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "war_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "position"
+    t.boolean  "friendly"
+  end
+
+  add_index "war_players", ["player_id"], name: "index_war_players_on_player_id", using: :btree
+  add_index "war_players", ["war_id"], name: "index_war_players_on_war_id", using: :btree
+
   create_table "wars", force: :cascade do |t|
     t.datetime "start_date"
     t.integer  "opposing_clan_id"
@@ -71,5 +89,7 @@ ActiveRecord::Schema.define(version: 20150221152920) do
   add_index "wars", ["start_date"], name: "index_wars_on_start_date", using: :btree
 
   add_foreign_key "user_sessions", "users"
+  add_foreign_key "war_players", "players"
+  add_foreign_key "war_players", "wars"
   add_foreign_key "wars", "clans", column: "opposing_clan_id"
 end

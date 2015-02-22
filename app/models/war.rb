@@ -1,6 +1,8 @@
 class War < ActiveRecord::Base
   belongs_to :opposing_clan, class_name: 'Clan'
 
+  has_many :war_players
+
   def calculate_start_date(war_status:, hours:, minutes:)
     end_time = Time.now
     end_time += hours.to_i.hours
